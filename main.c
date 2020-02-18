@@ -77,16 +77,9 @@ int main() {
 
             while(scanf("%s", s)) {
 
-                if (!strcmp(s, "inc")) {
-                    vd = map(&inc, vd);
-                    outputD(&vd);
-                } else if (!strcmp(s, "dec")) {
-                    vd = map(&dec, vd);
-                    outputD(&vd);
-                } else if (!strcmp(s, "abs")) {
-                    vd = map(&absolute, vd);
-                    outputD(&vd);
-                }
+                if (!strcmp(s, "inc")) vd = map(&inc, vd);
+                else if (!strcmp(s, "dec")) vd = map(&dec, vd);
+                else if (!strcmp(s, "abs")) vd = map(&absolute, vd);
                 else if (!strcmp(s, "concatenation")){
                     int n = 0;
                     printf("Enter size of vector which you want to concatenate : ");
@@ -95,11 +88,15 @@ int main() {
 
                     vectorD a = {NULL, n};
                     a.p = (double*)calloc(n, sizeof(double));
+                    for (int i = 0; i < n; ++i) scanf("%lf", &a.p[i]);
                     conc(&vd, &a);
-                    outputD(&vd);
                 }
                 else if (strcmp(s, "quit")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
                 else break;
+
+                if (!strcmp(s, "inc") || !strcmp(s, "dec") ||
+                !strcmp(s, "abs") || !strcmp(s, "concatenation")) outputD(&vd);
+                
                 printf("Choose function to apply to your elements :\n");
                 printf("1. inc\n2. dec\n3. abs\n4. concatenation\n5. quit\n");
             }
