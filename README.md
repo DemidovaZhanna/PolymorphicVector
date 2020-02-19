@@ -1,3 +1,2 @@
 # Labs
-Код моих лаб по программированию. 
-Второй семестр.
+Second semester. My code of programming labs.
