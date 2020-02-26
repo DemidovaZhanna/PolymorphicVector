@@ -194,7 +194,7 @@ int main() {
                 else break;
 
                 if (!strcmp(s, "1") || !strcmp(s, "2") || !strcmp(s, "3") || !strcmp(s, "4") ||
-                    !strcmp(s, "5") || !strcmp(s, "6") || !strcmp(s, "7")) outputD(&vd);
+                    !strcmp(s, "5") || !strcmp(s, "6")) outputD(&vd);
 
                 printf("Choose number of option to apply to your elements :\n");
                 printf("1. Add 1\n2. Sub 1\n3. Abs\n4. Elements greater than 0\n5. Elements lesser than 0\n6. Concatenation\n7. quit\n");
