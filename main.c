@@ -190,7 +190,7 @@ int main() {
                     for (int i = 0; i < a.size; ++i) scanf("%lf", &a.p[i]);
                     conc(&vd, &a);
                 }
-                else if (strcmp(s, "quit") && strcmp(s, "7")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
+                else if (strcmp(s, "7")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
                 else break;
 
                 if (!strcmp(s, "1") || !strcmp(s, "2") || !strcmp(s, "3") || !strcmp(s, "4") ||
