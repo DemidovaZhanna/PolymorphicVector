@@ -1,7 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <math.h>
 #include "vectorD.h"
 #include "general_fun.h"
 
@@ -17,10 +14,6 @@ typedef struct Dynamic_Array_Complex {
     size_t size;
     size_t capacity;
 } vectorC;
-
-//General functions
-
-//vectorD functions :
 
 int main() {
     int n = 0;
