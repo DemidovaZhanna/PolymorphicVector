@@ -3,6 +3,7 @@
 //
 
 #include "general_fun.h"
+#include <string.h>
 
 double max(double a, double b){
     return (a <= b ? b : a);

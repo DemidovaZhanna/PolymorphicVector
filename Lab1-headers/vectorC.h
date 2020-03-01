@@ -13,8 +13,8 @@
 
 typedef struct Dynamic_Array_Complex {
     complex* p;
-    size_t size;
-    size_t capacity;
+    int size;
+    int capacity;
 } vectorC;
 
 

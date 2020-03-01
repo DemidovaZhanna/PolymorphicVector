@@ -25,7 +25,7 @@ void add_element_C(vectorC* vd, complex c){
 void outputC(vectorC* vd){
     printf("Your vector : ");
     int n = vd->size;
-    for (int i = 0; i < n; ++i) printf("%lf %lfi", vd->p[i].a, vd->p[i].b);
+    for (int i = 0; i < n; ++i) printf("%lf + %lfi, ", vd->p[i].a, vd->p[i].b);
     printf("\n");
 }
 
@@ -35,7 +35,7 @@ complex inc_imag(complex c) { return make_complex(c.a, c.b + 1); }
 complex dec_real(complex c) { return make_complex(c.a - 1, c.b); }
 complex dec_imag(complex c) { return make_complex(c.a, c.b - 1); }
 
-double absolute(complex c) { return sqrt(square(c.a) + square(c.b)); }
+//double absolute(complex c) { return sqrt(square(c.a) + square(c.b)); }
 
 vectorC map_C(complex (*f)(complex), vectorC vc){
     vectorC new_vc = {NULL, vc.size};

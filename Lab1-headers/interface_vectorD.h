@@ -5,7 +5,7 @@
 #ifndef LABA1_INTERFACE_VECTORD_H
 #define LABA1_INTERFACE_VECTORD_H
 
-#include <stdlib.h>
+#include "vectorD.h"
 
 void interface_vectorD(int);
 

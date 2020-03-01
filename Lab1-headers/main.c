@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "general_fun.h"
 #include "interface_vectorD.h"
 #include "interface_vectorC.h"
@@ -27,6 +28,7 @@ int main() {
         if (!strcmp(s, "Real")) { interface_vectorD(n); break; }
         else if (!strcmp(s, "Complex")) { interface_vectorC(n); break; }
         else printf("\nERROR : Invalid keyword. TRY AGAIN.\n\n");
+        printf("Do you want array of real or complex numbers?\nType \"Real\" or \"Complex\" : ");
     }
 
     return 0;

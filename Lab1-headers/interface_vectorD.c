@@ -3,11 +3,10 @@
 //
 
 #include "interface_vectorD.h"
-#include "vectorD.h"
 #include "general_fun.h"
-#include <stdio.h>
+#include <string.h>
 
-const unsigned int MAXN = (1U << 31) - 1;
+const int MAXN;
 
 void interface_vectorD(int n) {
     vectorD vd = make_vd(n);

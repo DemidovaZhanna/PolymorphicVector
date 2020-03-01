@@ -3,13 +3,12 @@
 //
 
 #include "interface_vectorC.h"
-
 #include <stdio.h>
 #include "vectorC.h"
 #include "general_fun.h"
-#include <stdlib.h>
+#include <string.h>
 
-const int MAXN = (1U << 31) - 1;
+const int MAXN;
 
 void interface_vectorC(int n) {
     vectorC vc = make_vc(n);

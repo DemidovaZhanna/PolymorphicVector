@@ -12,8 +12,8 @@
 
 typedef struct Dynamic_Array_Double {
     double* p;
-    size_t size;
-    size_t capacity;
+    int size;
+    int capacity;
 } vectorD;
 
 void expand_capacity(vectorD*);
