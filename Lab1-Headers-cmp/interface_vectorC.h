@@ -5,6 +5,8 @@
 #ifndef LABA1_INTERFACE_VECTORC_H
 #define LABA1_INTERFACE_VECTORC_H
 
-void interface_vectorC(int);
+#include "vectorC.h"
+
+void interface_vectorC(size_t);
 
 #endif //LABA1_INTERFACE_VECTORC_H

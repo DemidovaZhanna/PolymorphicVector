@@ -53,7 +53,7 @@ vectorD where_D(bool (*filter)(double), vectorD* vd) {
     return new_vd;
 }
 
-void conc_D(vectorD* x, vectorD* a){
+void concatenation_D(vectorD* x, vectorD* a){
     size_t new_size = x->size + a->size;
     size_t prev_size = x->size;
     x->size = new_size;

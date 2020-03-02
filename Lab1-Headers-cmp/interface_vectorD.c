@@ -6,11 +6,11 @@
 #include "general_fun.h"
 #include <string.h>
 
-const int MAXN;
+const size_t MAXN;
 
-void interface_vectorD(int n) {
+void interface_vectorD(size_t n) {
     vectorD vd = make_vd(n);
-    printf("Enter %i real numbers : ", n);
+    printf("Enter %zu real numbers : ", n);
     n = vd.size;
     for (int i = 0; i < n; ++i) scanf("%lf", vd.p + i);
 
@@ -47,25 +47,25 @@ void interface_vectorD(int n) {
 
         //concatenation
         else if (!strcmp(s, "6")) {
-            int n = 0;
+            size_t n = 0;
             char sn[100] = "";
             printf("Enter size of vector which you want to concatenate : ");
             scanf("%s", sn);
             while (sn[0] == '-' || is_greater_than_max(sn, MAXN - vd.size)) {
                 if (sn[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
-                else printf("\nERROR : Too big size, choose less number <= %i. TRY AGAIN\n\n", MAXN - vd.size);
+                else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - vd.size);
                 printf("Enter size of vector which you want to concatenate : ");
                 scanf("%s", sn);
             }
 
             n = convert_str_to_int(sn);
 
-            printf("Enter %i elements separated by a space of your vector : ", n);
+            printf("Enter %zu elements separated by a space of your vector : ", n);
             if (n == 0) printf("\n");
 
             vectorD a = make_vd(n);
             for (int i = 0; i < a.size; ++i) scanf("%lf", &a.p[i]);
-            conc_D(&vd, &a);
+            concatenation_D(&vd, &a);
         } else if (strcmp(s, "7")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
         else break;
 

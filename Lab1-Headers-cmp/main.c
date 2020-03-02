@@ -4,17 +4,17 @@
 #include "interface_vectorD.h"
 #include "interface_vectorC.h"
 
-const int MAXN = (1U << 31) - 1;
+const size_t MAXN = (1U << 31) - 1;
 
 int main() {
-    int n = 0;
+    size_t n = 0;
     printf("Write down size of an array : ");
     char sn[100] = "";
     scanf("%s", sn);
 
     while (sn[0] == '-' || is_greater_than_max(sn, MAXN)){
         if (sn[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
-        else printf("\nERROR : Too big size, choose less number <= %i. TRY AGAIN\n\n", MAXN);
+        else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN);
         printf("Write down size of an array : ");
         scanf("%s", sn);
     }

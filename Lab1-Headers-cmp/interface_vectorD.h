@@ -7,6 +7,6 @@
 
 #include "vectorD.h"
 
-void interface_vectorD(int);
+void interface_vectorD(size_t);
 
 #endif //LABA1_INTERFACE_VECTORD_H

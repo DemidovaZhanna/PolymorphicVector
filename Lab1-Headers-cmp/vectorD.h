@@ -12,8 +12,8 @@
 
 typedef struct Dynamic_Array_Double {
     double* p;
-    int size;
-    int capacity;
+    size_t size;
+    size_t capacity;
 } vectorD;
 
 void expand_capacity(vectorD*);
@@ -29,6 +29,6 @@ bool is_lesser0(double);
 
 vectorD map_D(double (*)(double), vectorD);
 vectorD where_D(bool (*)(double), vectorD*);
-void conc_D(vectorD*, vectorD*);
+void concatenation_D(vectorD*, vectorD*);
 
 #endif //LABA1_VECTORD_H
