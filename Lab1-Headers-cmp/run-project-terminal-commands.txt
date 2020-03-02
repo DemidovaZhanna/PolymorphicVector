@@ -1,4 +1,4 @@
-//You'll need gcc compiler on your machine
+//You'll need GCC compiler on your machine
 //Enter these commands into terminal to run program fast
 
 gcc -c main.c complexV.c general_fun.c interface_vectorC.c interface_vectorD.c vectorC.c vectorD.c
