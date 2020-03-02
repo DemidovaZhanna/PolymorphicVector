@@ -7,3 +7,5 @@ gcc main.o complexV.o general_fun.o interface_vectorC.o interface_vectorD.o vect
 //Or shorter variant that does the same
 
 gcc main.c complexV.c general_fun.c interface_vectorC.c interface_vectorD.c vectorC.c vectorD.c -o program
+
+//Then run "program"
