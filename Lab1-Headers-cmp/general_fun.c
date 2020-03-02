@@ -33,3 +33,9 @@ int convert_str_to_int(char const * s){
 
     return res;
 }
+
+bool is_num(char const* s){
+    int n = strlen(s);
+    for (int i = 0; i < n; ++i) if (!(s[i] <= '9' && s[i] >= '0')) return false;
+    return true;
+}

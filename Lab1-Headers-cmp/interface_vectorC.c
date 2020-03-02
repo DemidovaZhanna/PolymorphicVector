@@ -44,8 +44,9 @@ void interface_vectorC(size_t n) {
             char sn[100] = "";
             printf("Enter size of vector which you want to concatenate : ");
             scanf("%s", sn);
-            while (sn[0] == '-' || is_greater_than_max(sn, MAXN - vc.size)) {
+            while (sn[0] == '-' || is_greater_than_max(sn, MAXN - vc.size) || !is_num(sn)) {
                 if (sn[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
+                else if (!is_num(sn)) printf("\nERROR : It's not a number. TRY AGAIN\n\n");
                 else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - vc.size);
                 printf("Enter size of vector which you want to concatenate : ");
                 scanf("%s", sn);
@@ -70,4 +71,7 @@ void interface_vectorC(size_t n) {
         printf("Choose number of option to apply to your elements :\n");
         printf("1. Inc real \n2. Inc imag \n3. Dec real \n4. Dec imag \n5. Concatenation \n6. quit\n");
     }
+
+    free(vc.p);
+    vc.p = NULL;
 }

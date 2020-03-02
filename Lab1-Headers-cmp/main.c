@@ -12,8 +12,9 @@ int main() {
     char sn[100] = "";
     scanf("%s", sn);
 
-    while (sn[0] == '-' || is_greater_than_max(sn, MAXN)){
+    while (sn[0] == '-' || is_greater_than_max(sn, MAXN) || !is_num(sn)){
         if (sn[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
+        else if (!is_num(sn)) printf("\nERROR : It's not a number. TRY AGAIN\n\n");
         else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN);
         printf("Write down size of an array : ");
         scanf("%s", sn);

@@ -51,8 +51,9 @@ void interface_vectorD(size_t n) {
             char sn[100] = "";
             printf("Enter size of vector which you want to concatenate : ");
             scanf("%s", sn);
-            while (sn[0] == '-' || is_greater_than_max(sn, MAXN - vd.size)) {
+            while (sn[0] == '-' || is_greater_than_max(sn, MAXN - vd.size) || !is_num(sn)) {
                 if (sn[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
+                else if (!is_num(sn)) printf("\nERROR : It's not a number. TRY AGAIN\n\n");
                 else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - vd.size);
                 printf("Enter size of vector which you want to concatenate : ");
                 scanf("%s", sn);
@@ -76,4 +77,7 @@ void interface_vectorD(size_t n) {
         printf("Choose number of option to apply to your elements :\n");
         printf("1. Add 1\n2. Sub 1\n3. Abs\n4. Elements greater than 0\n5. Elements lesser than 0\n6. Concatenation\n7. quit\n");
     }
+
+    free(vd.p);
+    vd.p = NULL;
 }
