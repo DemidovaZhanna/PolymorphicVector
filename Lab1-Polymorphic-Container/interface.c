@@ -4,7 +4,6 @@
 
 #include "interface.h"
 
-
 const size_t MAXN;
 
 void interface(size_t size, int type){
@@ -23,9 +22,15 @@ void interface(size_t size, int type){
 
         OutputVector(v);
 
-        printf("\nWhat do you want to do with your vector?\n");
-        printf("Choose number of option to apply to your elements :\n");
-        printf("1. Inc\n2. Dec\n3. Abs\n4. Elements greater than 0\n5. Elements lesser than 0\n6. Concatenation\n7. Quit\n");
+        printf("\nWhat do you want to do with your vector?\n"
+               "Choose number of option to apply to your elements :\n"
+               "1. Inc\n"
+               "2. Dec\n"
+               "3. Abs\n"
+               "4. Elements greater than 0\n"
+               "5. Elements lesser than 0\n"
+               "6. Concatenation\n"
+               "7. Quit\n");
 
         char s[100] = "";
 
@@ -85,8 +90,14 @@ void interface(size_t size, int type){
             if (!strcmp(s, "1") || !strcmp(s, "2") || !strcmp(s, "3") || !strcmp(s, "4") ||
                 !strcmp(s, "5") || !strcmp(s, "6")) OutputVector(v);
 
-            printf("Choose number of option to apply to your elements :\n");
-            printf("1. Inc\n2. Dec\n3. Abs\n4. Elements greater than 0\n5. Elements lesser than 0\n6. Concatenation\n7. Quit\n");
+            printf("Choose number of option to apply to your elements :\n"
+                   "1. Inc\n"
+                   "2. Dec\n"
+                   "3. Abs\n"
+                   "4. Elements greater than 0\n"
+                   "5. Elements lesser than 0\n"
+                   "6. Concatenation\n"
+                   "7. Quit\n");
         }
     }
     else if (GetElType(v) == COMPLEX){
@@ -96,9 +107,14 @@ void interface(size_t size, int type){
 
         OutputVector(v);
 
-        printf("\nWhat do you want to do with your vector?\n");
-        printf("Choose number of option to apply to your elements :\n");
-        printf("1. Inc real \n2. Inc imag \n3. Dec real \n4. Dec imag \n5. Concatenation \n6. Quit\n");
+        printf("\nWhat do you want to do with your vector?\n"
+               "Choose number of option to apply to your elements :\n"
+               "1. Inc real \n"
+               "2. Inc imag \n"
+               "3. Dec real \n"
+               "4. Dec imag \n"
+               "5. Concatenation \n"
+               "6. Quit\n");
 
         char s[100] = "";
 
@@ -135,7 +151,7 @@ void interface(size_t size, int type){
                 if (n == 0) printf("\n");
 
                 Vector* v2 = MakeVector(n, COMPLEX);
-                for (size_t i = 0; i < GetSize(v2); ++i) scanf("%lf %lf", &GetDataC(v)[i].a, &GetDataC(v)[i].b);
+                for (size_t i = 0; i < GetSize(v2); ++i) scanf("%lf %lf", &GetDataC(v2)[i].a, &GetDataC(v2)[i].b);
                 Concatenation(v, v2);
 
                 DeleteVector(v2);
@@ -147,8 +163,13 @@ void interface(size_t size, int type){
                 !strcmp(s, "5")) OutputVector(v);
 
 
-            printf("Choose number of option to apply to your elements :\n");
-            printf("1. Inc real \n2. Inc imag \n3. Dec real \n4. Dec imag \n5. Concatenation \n6. Quit\n");
+            printf("Choose number of option to apply to your elements :\n"
+                   "1. Inc real \n"
+                   "2. Inc imag \n"
+                   "3. Dec real \n"
+                   "4. Dec imag \n"
+                   "5. Concatenation \n"
+                   "6. Quit\n");
         }
     }
     else { UnknownType(); return; }

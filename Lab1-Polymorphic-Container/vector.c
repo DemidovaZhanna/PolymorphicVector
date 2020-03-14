@@ -13,18 +13,19 @@ void UnknownType(){
 // *** Constructor ***
 
 Vector* MakeVector(size_t size, Eltype eltype) {
-//    size_t type_size = 0;
-//    if (eltype == INT) type_size = sizeof(int);
-//    else if (eltype == COMPLEX) type_size = sizeof(complex);
-//    else UnknownType();
     Vector* v = (Vector*)malloc(sizeof(Vector));
 
     v->eltype = eltype;
     v->size = size;
     v->capacity = max(size, 100);
-    if (v->eltype == INT) v->data = (int*)calloc(v->capacity, sizeof(int));
-    else if (v->eltype == COMPLEX) v->data = (complex*)calloc(v->capacity, sizeof(complex));
+
+    size_t type_size = 0;
+    if (v->eltype == INT) type_size = sizeof(int);
+    else if (v->eltype == COMPLEX) type_size = sizeof(complex);
     else UnknownType();
+
+    v->data = calloc(v->size, type_size);
+
     return v;
 };
 
@@ -34,12 +35,12 @@ void DeleteVector(Vector* v) {
     if (!v) {
         FreeData(v->data);
         FreeData(v);
+        v = NULL;
     }
 }
 
 void FreeData(void* ptr) {
-    free(ptr);
-    ptr = NULL;
+    if (!ptr) { free(ptr); ptr = NULL; }
 }
 
 // *** Setters ***
@@ -50,8 +51,8 @@ void SetCapacity(Vector* v, size_t capacity) { v->capacity = capacity; }
 
 void SetElement(Vector* v, size_t i, void* d) {
     Eltype T = v->eltype;
-    if (T == INT) ((int*)v->data)[i] = *(int*)d;
-    else if (T == COMPLEX) ((complex*)v->data)[i] = *(complex*)d;
+    if (T == INT) GetDataI(v)[i] = *(int*)d;
+    else if (T == COMPLEX) GetDataC(v)[i] = *(complex*)d;
     else UnknownType();
 }
 
@@ -92,11 +93,11 @@ void ExpandCapacity(Vector* v) {
     Eltype T = GetElType(v);
     if (T == INT) {
         SetCapacity(v, GetCapacity(v) * 2);
-        SetData(v, (int*)realloc(GetDataI(v), GetCapacity(v) * sizeof(int)));
+        SetData(v, realloc(GetDataI(v), GetCapacity(v) * sizeof(int)));
     }
     else if (T == COMPLEX) {
         SetCapacity(v, GetCapacity(v) * 2);
-        SetData(v, (complex*)realloc(GetDataC(v), GetCapacity(v) * sizeof(complex)));
+        SetData(v, realloc(GetDataC(v), GetCapacity(v) * sizeof(complex)));
     }
     else UnknownType();
 }
@@ -137,35 +138,25 @@ void OutputVector(Vector* v){
 
 Vector* MapI(int (*f)(int), Vector* v){
     Vector* nv = MakeVector(GetSize(v), INT);
-    size_t size = GetSize(v);
-    int* new_data = GetDataI(nv);
-    int* data = GetDataI(v);
-    for (size_t i = 0; i < size; ++i) new_data[i] = f(data[i]);
+    for (size_t i = 0; i < GetSize(v); ++i) GetDataI(nv)[i] = f(GetDataI(v)[i]);
     return nv;
 }
 
 Vector* MapC(complex (*f)(complex), Vector* v){
     Vector* nv = MakeVector(GetSize(v), COMPLEX);
-    size_t size = GetSize(v);
-    complex* new_data = GetDataC(nv);
-    complex* data = GetDataC(v);
-    for (size_t i = 0; i < size; ++i) new_data[i] = f(data[i]);
+    for (size_t i = 0; i < GetSize(v); ++i) GetDataC(nv)[i] = f(GetDataC(v)[i]);
     return nv;
 }
 
 Vector* FilterI(bool (*filter)(int), Vector* v){
     Vector* nv = MakeVector(0, INT);
-    size_t size = GetSize(v);
-    int* data = GetDataI(v);
-    for (size_t i = 0; i < size; ++i) if (filter(data[i])) PushBack(nv, &data[i]);
+    for (size_t i = 0; i < GetSize(v); ++i) if (filter(GetDataI(v)[i])) PushBack(nv, &GetDataI(v)[i]);
     return nv;
 }
 
 Vector* FilterC(bool (*filter)(complex), Vector* v){
     Vector* nv = MakeVector(0, COMPLEX);
-    size_t size = GetSize(v);
-    complex* data = GetDataC(v);
-    for (size_t i = 0; i < size; ++i) if (filter(data[i])) PushBack(nv, &data[i]);
+    for (size_t i = 0; i < GetSize(v); ++i) if (filter(GetDataC(v)[i])) PushBack(nv, &GetDataC(v)[i]);
     return nv;
 }
 void Concatenation(Vector* v1, Vector* v2){
@@ -186,20 +177,18 @@ void ConcatenationI(Vector* v1, Vector* v2){
     size_t new_size = GetSize(v1) + GetSize(v2);
     size_t prev_size = GetSize(v1);
     SetSize(v1, new_size);
-    SetData(v1, (int*)realloc(GetDataI(v1), new_size * sizeof(int)));
-    int* data1 = GetDataI(v1);
-    int* data2 = GetDataI(v2);
-    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) data1[i] = data2[j];
+    SetData(v1, realloc(GetDataI(v1), new_size * sizeof(int)));
+
+    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) GetDataI(v1)[i] = GetDataI(v2)[j];
 }
 
 void ConcatenationC(Vector* v1, Vector* v2){
     size_t new_size = GetSize(v1) + GetSize(v2);
     size_t prev_size = GetSize(v1);
     SetSize(v1, new_size);
-    SetData(v1, (complex*)realloc(GetDataC(v1), new_size * sizeof(complex)));
-    complex* data1 = GetDataC(v1);
-    complex* data2 = GetDataC(v2);
-    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) data1[i] = data2[j];
+    SetData(v1, realloc(GetDataC(v1), new_size * sizeof(complex)));
+
+    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) GetDataC(v1)[i] = GetDataC(v2)[j];
 }
 
 // *** Complex Functions ***
@@ -216,5 +205,3 @@ int DecI(int x) { return x - 1;}
 int AbsoluteI(int x) { return abs(x); }
 bool IsGreaterThan0(int x) { return (x > 0 ? 1 : 0); }
 bool IsLesserThan0(int x) { return (x < 0 ? 1 : 0); }
-
-

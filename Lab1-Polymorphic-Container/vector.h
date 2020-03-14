@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "utils.h"
-#include "complexV.h"
+#include "complex_unit.h"
 
 typedef enum {INT, COMPLEX} Eltype;
 

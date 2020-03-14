@@ -2,8 +2,8 @@
 // Created by Vasiliy Evdokimov on 28.02.2020.
 //
 
-#ifndef LABA1_COMPLEXV_H
-#define LABA1_COMPLEXV_H
+#ifndef LABA1_COMPLEX_UNIT_H
+#define LABA1_COMPLEX_UNIT_H
 
 #include <stdlib.h>
 
@@ -34,4 +34,4 @@ complex* Multc(complex*, complex*);
 complex* DivC(complex*, complex*);
 
 
-#endif //LABA1_COMPLEXV_H
+#endif //LABA1_COMPLEX_UNIT_H

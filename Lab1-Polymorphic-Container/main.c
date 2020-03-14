@@ -26,12 +26,17 @@ int main() {
 
     char s[100] = "";
 
-    printf("Do you want array of real or complex numbers?\nType \"Integer\" or \"Complex\" : ");
+    printf("Choose type of your vector :\n"
+           "1. Integer\n"
+           "2. Complex\n");
+
     while (scanf("%s", s)) {
-        if (!strcmp(s, "Integer")) { interface(n, INT); break; }
-        else if (!strcmp(s, "Complex")) { interface(n, COMPLEX); break; }
+        if (!strcmp(s, "Integer") || !strcmp(s, "1")) { interface(n, INT); break; }
+        else if (!strcmp(s, "Complex") || !strcmp(s, "2")) { interface(n, COMPLEX); break; }
         else printf("\nERROR : Invalid keyword. TRY AGAIN.\n\n");
-        printf("Do you want array of real or complex numbers?\nType \"Integer\" or \"Complex\" : ");
+        printf("Choose type of your vector :\n"
+               "1. Integer\n"
+               "2. Complex\n");
     }
 
     return 0;
