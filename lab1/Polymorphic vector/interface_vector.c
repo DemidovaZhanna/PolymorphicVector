@@ -2,15 +2,30 @@
 // Created by Vasiliy Evdokimov on 12.03.2020.
 //
 
-#include "interface.h"
+#include "interface_vector.h"
 
 const size_t MAXN;
 
-void interface(size_t size, Eltype type){
+void interface_vector(){
+
+    printf("Write down size of vector : ");
+
+    size_t size = read_correct_num(0);
+    char s[100] = "";
+
+    printf("Choose type of your vector :\n"
+           "1. Integer\n"
+           "2. Complex\n");
+
     Eltype T = -1;
-    if (type == INT) T = INT;
-    else if (type == COMPLEX) T = COMPLEX;
-    else UnknownType();
+    while (scanf("%s", s)) {
+        if (!strcmp(s, "Integer") || !strcmp(s, "1")) { T = INT; break; }
+        else if (!strcmp(s, "Complex") || !strcmp(s, "2")) { T = COMPLEX; break; }
+        else Warning("Invalid keyword.");
+        printf("Choose type of your vector :\n"
+               "1. Integer\n"
+               "2. Complex\n");
+    }
 
     Vector* v = MakeVector(size, T);
     bool is_data_correct = InputVector(v);
