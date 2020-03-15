@@ -4,6 +4,7 @@
 
 
 #include "complex_unit.h"
+#include "utils.h"
 
 // *** Constructor ***
 
@@ -21,6 +22,7 @@ void DeleteComplex(complex* c){
         free(c);
         c = NULL;
     }
+    else Warning("Trying to free NULL pointer");
 }
 
 // *** Getters ***
@@ -52,3 +54,10 @@ complex* DivC(complex* a, complex* b){
     double c = b->a * b->a + b->b * b->b;
     return MakeComplex(res->a / c, res->b / c);
 }
+
+// *** Utils ***
+
+complex IncReal(complex c) { return *MakeComplex(GetReal(&c) + 1, GetImag(&c)); }
+complex IncImag(complex c) { return *MakeComplex(GetReal(&c), GetImag(&c) + 1); }
+complex DecReal(complex c) { return *MakeComplex(GetReal(&c) - 1, GetImag(&c)); }
+complex DecImag(complex c) { return *MakeComplex(GetReal(&c), GetImag(&c) - 1); }

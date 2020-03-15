@@ -1,9 +1,11 @@
+
 //
 // Created by Vasiliy Evdokimov on 04.03.2020.
 //
 
 #include "vector.h"
 
+size_t const DEFAULT_CAPACITY = 100;
 size_t const MAXN;
 
 // *** Console error information ***
@@ -20,7 +22,7 @@ Vector* MakeVector(size_t size, Eltype eltype) {
 
     v->eltype = eltype;
     v->size = size;
-    v->capacity = max(size, 100);
+    v->capacity = max(size, DEFAULT_CAPACITY);
 
     size_t type_size = 0;
     if (v->eltype == INT) type_size = sizeof(int);
@@ -40,10 +42,12 @@ void DeleteVector(Vector* v) {
         FreeData(v);
         v = NULL;
     }
+    else Warning("Trying to free NULL pointer");
 }
 
 void FreeData(void* ptr) {
     if (ptr) { free(ptr); ptr = NULL; }
+    else Warning("Trying to free NULL pointer");
 }
 
 // *** Getters ***
@@ -145,8 +149,14 @@ void OutputVector(Vector* v){
     Eltype T = GetElType(v);
     if (size == 0) { printf("\n"); return; }
 
-    if (T == INT) { for (size_t i = 0; i < size - 1; ++i) printf("%d, ", GetDataI(v)[i]); printf("%d\n", GetDataI(v)[size - 1]); }
-    else if (T == COMPLEX) { for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi, ", GetDataC(v)[i].a, GetDataC(v)[i].b); printf("%lf + %lfi\n", GetDataC(v)[size - 1].a, GetDataC(v)[size - 1].b); }
+    if (T == INT) {
+        for (size_t i = 0; i < size - 1; ++i) printf("%d, ", GetDataI(v)[i]);
+        printf("%d\n", GetDataI(v)[size - 1]);
+    }
+    else if (T == COMPLEX) {
+        for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi, ", GetDataC(v)[i].a, GetDataC(v)[i].b);
+        printf("%lf + %lfi\n", GetDataC(v)[size - 1].a, GetDataC(v)[size - 1].b);
+    }
     else UnknownType();
 }
 
@@ -217,18 +227,15 @@ Vector* FilterC(bool (*filter)(complex), Vector* v){
     for (size_t i = 0; i < GetSize(v); ++i) if (filter(GetDataC(v)[i])) PushBack(nv, &GetDataC(v)[i]);
     return nv;
 }
+
 void Concatenation(Vector* v1, Vector* v2){
     Eltype T1 = GetElType(v1);
     Eltype T2 = GetElType(v2);
-    if (T1 != T2){
-        UnknownType();
-        return;
-    }
+    if (T1 != T2) UnknownType();
 
     Eltype T = T1;
     if (T == INT) ConcatenationI(v1, v2);
     else if (T == COMPLEX) ConcatenationC(v1, v2);
-    else UnknownType();
 }
 
 void ConcatenationI(Vector* v1, Vector* v2){
@@ -248,13 +255,6 @@ void ConcatenationC(Vector* v1, Vector* v2){
 
     for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) GetDataC(v1)[i] = GetDataC(v2)[j];
 }
-
-// *** Complex Functions ***
-
-complex IncReal(complex c) { return *MakeComplex(GetReal(&c) + 1, GetImag(&c)); }
-complex IncImag(complex c) { return *MakeComplex(GetReal(&c), GetImag(&c) + 1); }
-complex DecReal(complex c) { return *MakeComplex(GetReal(&c) - 1, GetImag(&c)); }
-complex DecImag(complex c) { return *MakeComplex(GetReal(&c), GetImag(&c) - 1); }
 
 // *** Int Functions ***
 

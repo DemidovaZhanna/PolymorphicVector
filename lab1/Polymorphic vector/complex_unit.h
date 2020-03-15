@@ -37,5 +37,12 @@ complex* SubC(complex*, complex*);
 complex* Multc(complex*, complex*);
 complex* DivC(complex*, complex*);
 
+// *** Utils ***
+
+complex IncReal(complex);
+complex IncImag(complex);
+complex DecReal(complex);
+complex DecImag(complex);
+
 
 #endif //LABA1_COMPLEX_UNIT_H
