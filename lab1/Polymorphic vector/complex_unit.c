@@ -46,7 +46,8 @@ complex* SubC(complex* a, complex* b){
 }
 
 complex* MultC(complex* a, complex* b){
-    return MakeComplex(GetReal(a) * GetReal(b) - GetImag(a) * GetImag(b), GetReal(a) * GetImag(b) + GetImag(a) * GetReal(b));
+    return MakeComplex(GetReal(a) * GetReal(b) - GetImag(a) * GetImag(b),
+            GetReal(a) * GetImag(b) + GetImag(a) * GetReal(b));
 }
 
 complex* DivC(complex* a, complex* b){

@@ -1,4 +1,3 @@
-
 //
 // Created by Vasiliy Evdokimov on 04.03.2020.
 //
@@ -261,6 +260,7 @@ void ConcatenationC(Vector* v1, Vector* v2){
 int IncI(int x) { return x + 1; }
 int DecI(int x) { return x - 1;}
 int AbsoluteI(int x) { return abs(x); }
+int Square(int x) { return x * x; }
 
 // *** Int Predicates ***
 

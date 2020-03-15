@@ -73,20 +73,14 @@ void Concatenation(Vector*, Vector*);
 void ConcatenationI(Vector*, Vector*);
 void ConcatenationC(Vector*, Vector*);
 
-// *** Complex Functions ***
-
-complex IncReal(complex);
-complex IncImag(complex);
-complex DecReal(complex);
-complex DecImag(complex);
-
 // *** Int Functions ***
 
 int IncI(int);
 int DecI(int);
 int AbsoluteI(int);
+int Square(int);
 
-// *** Predicates
+// *** Int Predicates ***
 
 bool IsGreaterThan0(int);
 bool IsLesserThan0(int);
