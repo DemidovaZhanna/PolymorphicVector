@@ -1,3 +1,4 @@
+
 //
 // Created by Vasiliy Evdokimov on 04.03.2020.
 //
@@ -8,6 +9,7 @@
 
 void UnknownType(){
     printf("\n\nERROR : Unknown type. Undefined behaviour.\n\n");
+    exit(EXIT_FAILURE);
 }
 
 // *** Constructor ***
@@ -32,7 +34,7 @@ Vector* MakeVector(size_t size, Eltype eltype) {
 // *** Destructor ***
 
 void DeleteVector(Vector* v) {
-    if (!v) {
+    if (v){
         FreeData(v->data);
         FreeData(v);
         v = NULL;
@@ -40,25 +42,7 @@ void DeleteVector(Vector* v) {
 }
 
 void FreeData(void* ptr) {
-    if (!ptr) { free(ptr); ptr = NULL; }
-}
-
-// *** Setters ***
-
-void SetSize(Vector* v, size_t size) { v->size = size; }
-
-void SetCapacity(Vector* v, size_t capacity) { v->capacity = capacity; }
-
-void SetElement(Vector* v, size_t i, void* d) {
-    Eltype T = v->eltype;
-    if (T == INT) GetDataI(v)[i] = *(int*)d;
-    else if (T == COMPLEX) GetDataC(v)[i] = *(complex*)d;
-    else UnknownType();
-}
-
-void SetData(Vector* v, void* ptr) {
-    FreeData(GetData(v));
-    v->data = ptr;
+    if (ptr) { free(ptr); ptr = NULL; }
 }
 
 // *** Getters ***
@@ -87,17 +71,48 @@ Eltype GetElType(Vector const * v){
     return v->eltype;
 }
 
+// *** Setters ***
+
+void SetSize(Vector* v, size_t size) { v->size = size; }
+
+void SetCapacity(Vector* v, size_t capacity) { v->capacity = capacity; }
+
+void SetElement(Vector* v, size_t i, void* d) {
+    Eltype T = v->eltype;
+    if (T == INT) GetDataI(v)[i] = *(int*)d;
+    else if (T == COMPLEX) GetDataC(v)[i] = *(complex*)d;
+    else UnknownType();
+}
+
+void SetData(Vector* v, void* ptr) {
+    FreeData(GetData(v));
+    v->data = ptr;
+}
+
+//Function to set data with pointer being allocated via realloc
+//I can't use SetData for that purpose because pointer which
+//was given to realloc as an argument can be freed already
+//so in SetData I will free him again which cause
+//undefined behaviour
+//Even if realloc expand the given area there wouldn't be
+//any memory leaks because that is the same pointer which
+//points to a larger are at the same start
+//Check documentation (cppreference) for more info
+void SetDataRC(Vector* v, void* ptr_realloc){
+    v->data = ptr_realloc;
+}
+
 // *** Functions that change vector ***
 
 void ExpandCapacity(Vector* v) {
     Eltype T = GetElType(v);
     if (T == INT) {
         SetCapacity(v, GetCapacity(v) * 2);
-        SetData(v, realloc(GetDataI(v), GetCapacity(v) * sizeof(int)));
+        SetDataRC(v, realloc(GetDataI(v), GetCapacity(v) * sizeof(int)));
     }
     else if (T == COMPLEX) {
         SetCapacity(v, GetCapacity(v) * 2);
-        SetData(v, realloc(GetDataC(v), GetCapacity(v) * sizeof(complex)));
+        SetDataRC(v, realloc(GetDataC(v), GetCapacity(v) * sizeof(complex)));
     }
     else UnknownType();
 }
@@ -177,7 +192,7 @@ void ConcatenationI(Vector* v1, Vector* v2){
     size_t new_size = GetSize(v1) + GetSize(v2);
     size_t prev_size = GetSize(v1);
     SetSize(v1, new_size);
-    SetData(v1, realloc(GetDataI(v1), new_size * sizeof(int)));
+    SetDataRC(v1, realloc(GetDataI(v1), new_size * sizeof(int)));
 
     for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) GetDataI(v1)[i] = GetDataI(v2)[j];
 }
@@ -186,7 +201,7 @@ void ConcatenationC(Vector* v1, Vector* v2){
     size_t new_size = GetSize(v1) + GetSize(v2);
     size_t prev_size = GetSize(v1);
     SetSize(v1, new_size);
-    SetData(v1, realloc(GetDataC(v1), new_size * sizeof(complex)));
+    SetDataRC(v1, realloc(GetDataC(v1), new_size * sizeof(complex)));
 
     for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) GetDataC(v1)[i] = GetDataC(v2)[j];
 }

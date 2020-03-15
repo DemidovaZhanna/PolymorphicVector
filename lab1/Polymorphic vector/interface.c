@@ -8,17 +8,15 @@ const size_t MAXN;
 
 void interface(size_t size, int type){
     Eltype T = -1;
-    if (type == 1) T = INT;
-    else if (type == 2) T = COMPLEX;
-    else { UnknownType(); return; }
+    if (type == INT) T = INT;
+    else if (type == COMPLEX) T = COMPLEX;
+    else UnknownType();
 
     Vector* v = MakeVector(size, T);
 
-
     if (GetElType(v) == INT) {
         printf("Enter %zu integer numbers : ", GetSize(v));
-        size_t n = GetSize(v);
-        for (size_t i = 0; i < n; ++i) scanf("%d", GetDataI(v) + i);
+        for (size_t i = 0; i < GetSize(v); ++i) scanf("%d", GetDataI(v) + i);
 
         OutputVector(v);
 
@@ -59,18 +57,9 @@ void interface(size_t size, int type){
 
             //Concatenation
             else if (!strcmp(s, "6")){
-                char sn[100] = "";
                 printf("Enter size of vector which you want to concatenate to your vector : ");
-                scanf("%s", sn);
-                while (sn[0] == '-' || is_greater_than_max(sn, MAXN - GetSize(v)) || !is_num(sn)) {
-                    if (sn[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
-                    else if (!is_num(sn)) printf("\nERROR : It's not a number. TRY AGAIN\n\n");
-                    else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - GetSize(v));
-                    printf("Enter size of vector which you want to concatenate : ");
-                    scanf("%s", sn);
-                }
 
-                size_t n = convert_str_to_int(sn);
+                size_t n = read_correct_num(GetSize(v));
 
                 printf("Enter %zu elements separated by space of your vector : ", n);
                 if (n == 0) printf("\n");
@@ -82,6 +71,7 @@ void interface(size_t size, int type){
                 DeleteVector(v2);
             }
 
+            //Some bullshit
             else if (strcmp(s, "7")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
 
             //Quit
@@ -102,8 +92,7 @@ void interface(size_t size, int type){
     }
     else if (GetElType(v) == COMPLEX){
         printf("Enter %zu complex numbers \"<real> <imag>\" : ", GetSize(v));
-        size_t n = GetSize(v);
-        for (size_t i = 0; i < n; ++i) scanf("%lf %lfi", &GetDataC(v)[i].a, &GetDataC(v)[i].b);
+        for (size_t i = 0; i < GetSize(v); ++i) scanf("%lf %lfi", &GetDataC(v)[i].a, &GetDataC(v)[i].b);
 
         OutputVector(v);
 
@@ -134,18 +123,9 @@ void interface(size_t size, int type){
 
             //Concatenation
             else if (!strcmp(s, "5")){
-                char sn[100] = "";
                 printf("Enter size of vector which you want to concatenate : ");
-                scanf("%s", sn);
-                while (sn[0] == '-' || is_greater_than_max(sn, MAXN - GetSize(v)) || !is_num(sn)) {
-                    if (sn[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
-                    else if (!is_num(sn)) printf("\nERROR : It's not a number. TRY AGAIN\n\n");
-                    else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - GetSize(v));
-                    printf("Enter size of vector which you want to concatenate : ");
-                    scanf("%s", sn);
-                }
 
-                size_t n = convert_str_to_int(sn);
+                size_t n = read_correct_num(GetSize(v));
 
                 printf("Enter %zu elements \"<real> <imag>\" : ", n);
                 if (n == 0) printf("\n");
@@ -156,7 +136,11 @@ void interface(size_t size, int type){
 
                 DeleteVector(v2);
             }
+
+            //Some bullshit
             else if (strcmp(s, "6")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
+
+            //Quit
             else break;
 
             if (!strcmp(s, "1") || !strcmp(s, "2") || !strcmp(s, "3") || !strcmp(s, "4") ||
@@ -172,7 +156,7 @@ void interface(size_t size, int type){
                    "6. Quit\n");
         }
     }
-    else { UnknownType(); return; }
+    else UnknownType();
 
     DeleteVector(v);
 }

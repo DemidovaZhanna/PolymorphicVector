@@ -16,6 +16,10 @@ typedef struct Complex {
 
 complex* MakeComplex(double, double);
 
+// *** Destructor ***
+
+void DeleteComplex(complex*);
+
 // *** Getters ***
 
 double GetReal(complex*);

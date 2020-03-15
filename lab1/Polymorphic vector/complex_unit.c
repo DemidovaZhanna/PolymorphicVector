@@ -5,13 +5,22 @@
 
 #include "complex_unit.h"
 
-// *** Constructor
+// *** Constructor ***
 
 complex* MakeComplex(double x, double y){
     complex* c = (complex*)malloc(sizeof(complex));
     c->a = x;
     c->b = y;
     return c;
+}
+
+// *** Destructor ***
+
+void DeleteComplex(complex* c){
+    if (c) {
+        free(c);
+        c = NULL;
+    }
 }
 
 // *** Getters ***
