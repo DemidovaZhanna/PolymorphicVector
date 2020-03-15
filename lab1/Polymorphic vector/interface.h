@@ -8,6 +8,6 @@
 #include "vector.h"
 #include "string.h"
 
-void interface(size_t, int);
+void interface(size_t, Eltype);
 
 #endif //LABA1_INTERFACE_H

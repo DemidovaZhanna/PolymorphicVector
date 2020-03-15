@@ -42,7 +42,7 @@ void DeleteVector(Vector* v) {
         FreeData(v);
         v = NULL;
     }
-    else Warning("Trying to free NULL pointer");
+    else Warning("Trying to free NULL pointer on Vector");
 }
 
 void FreeData(void* ptr) {
@@ -141,7 +141,7 @@ void PushBackC(Vector* v, complex* c){
     SetElement(v, GetSize(v) - 1, c);
 }
 
-// *** Input and Output ***
+// *** Input and Output procedures ***
 
 void OutputVector(Vector* v){
     printf("Your vector : ");
@@ -150,11 +150,11 @@ void OutputVector(Vector* v){
     if (size == 0) { printf("\n"); return; }
 
     if (T == INT) {
-        for (size_t i = 0; i < size - 1; ++i) printf("%d, ", GetDataI(v)[i]);
+        for (size_t i = 0; i < size - 1; ++i) printf("%d  ", GetDataI(v)[i]);
         printf("%d\n", GetDataI(v)[size - 1]);
     }
     else if (T == COMPLEX) {
-        for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi, ", GetDataC(v)[i].a, GetDataC(v)[i].b);
+        for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi  ", GetDataC(v)[i].a, GetDataC(v)[i].b);
         printf("%lf + %lfi\n", GetDataC(v)[size - 1].a, GetDataC(v)[size - 1].b);
     }
     else UnknownType();
@@ -261,5 +261,10 @@ void ConcatenationC(Vector* v1, Vector* v2){
 int IncI(int x) { return x + 1; }
 int DecI(int x) { return x - 1;}
 int AbsoluteI(int x) { return abs(x); }
+
+// *** Int Predicates ***
+
 bool IsGreaterThan0(int x) { return (x > 0 ? 1 : 0); }
 bool IsLesserThan0(int x) { return (x < 0 ? 1 : 0); }
+bool IsEven(int x) { return (x % 2 == 0 ? 1 : 0); }
+bool IsOdd(int x) { return (x % 2 == 1 ? 1 : 0); }

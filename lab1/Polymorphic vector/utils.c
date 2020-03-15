@@ -8,6 +8,16 @@
 
 const size_t MAXN;
 
+void Error(char const * msg){
+    printf("\n*** ERROR : %s ***\n", msg);
+    exit(EXIT_FAILURE);
+}
+
+void Warning(char const * msg){
+    printf("\n*** WARNING : %s ***\n", msg);
+    printf("*** Try again. ***\n\n");
+}
+
 double max(double a, double b){
     return (a <= b ? b : a);
 }
@@ -53,22 +63,12 @@ size_t read_correct_num(size_t delta){
     scanf("%s", s);
 
     while (!is_non_negative(s) || is_greater_than_max(s, MAXN - delta) || !is_num(s)){
-        if (!is_non_negative(s)) printf("\nERROR : Negative size. TRY AGAIN!\n\n");
-        else if (!is_num(s)) printf("\nERROR : It's not a number. TRY AGAIN\n\n");
-        else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - delta);
+        if (!is_non_negative(s)) Warning("Negative size.");
+        else if (!is_num(s)) Warning("It's not a number.");
+        else printf("\nWARNING : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - delta);
         printf("Write down size of an array : ");
         scanf("%s", s);
     }
 
     return convert_str_to_int(s);
-}
-
-void Error(char const * msg){
-    printf("\n*** ERROR : %s ***\n", msg);
-    exit(EXIT_FAILURE);
-}
-
-void Warning(char const * msg){
-    printf("\n*** WARNING : %s ***\n", msg);
-    printf("*** Try again. ***\n\n");
 }

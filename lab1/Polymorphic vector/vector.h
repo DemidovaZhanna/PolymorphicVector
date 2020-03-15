@@ -58,7 +58,7 @@ void PushBack(Vector*, void*);
 void PushBackI(Vector*, int*);
 void PushBackC(Vector*, complex*);
 
-// *** Input and Output ***
+// *** Input and Output procedures ***
 
 bool InputVector(Vector *);
 void OutputVector(Vector*);
@@ -80,12 +80,17 @@ complex IncImag(complex);
 complex DecReal(complex);
 complex DecImag(complex);
 
-// *** Real Functions ***
+// *** Int Functions ***
 
 int IncI(int);
 int DecI(int);
 int AbsoluteI(int);
+
+// *** Predicates
+
 bool IsGreaterThan0(int);
 bool IsLesserThan0(int);
+bool IsEven(int);
+bool IsOdd(int);
 
 #endif //LABA1_VECTOR_H

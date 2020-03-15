@@ -6,7 +6,7 @@
 
 const size_t MAXN;
 
-void interface(size_t size, int type){
+void interface(size_t size, Eltype type){
     Eltype T = -1;
     if (type == INT) T = INT;
     else if (type == COMPLEX) T = COMPLEX;
@@ -27,7 +27,9 @@ void interface(size_t size, int type){
                "4. Elements greater than 0\n"
                "5. Elements lesser than 0\n"
                "6. Concatenation\n"
-               "7. Quit\n");
+               "7. Even numbers\n"
+               "8. Odd numbers\n"
+               "9. Quit\n");
 
         char s[100] = "";
 
@@ -69,23 +71,38 @@ void interface(size_t size, int type){
                 DeleteVector(v2);
             }
 
+            //Even numbers
+            else if (!strcmp(s, "7")){
+                Vector* new_v = FilterI(&IsEven, v);
+                OutputVector(new_v);
+            }
+
+            //Odd numbers
+            else if (!strcmp(s, "8")){
+                Vector* new_v = FilterI(&IsOdd, v);
+                OutputVector(new_v);
+            }
+
             //Some bullshit
-            else if (strcmp(s, "7")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
+            else if (strcmp(s, "9")) Warning("Wrong keyword");
 
             //Quit
             else break;
 
             if (!strcmp(s, "1") || !strcmp(s, "2") || !strcmp(s, "3") || !strcmp(s, "4") ||
-                !strcmp(s, "5") || !strcmp(s, "6")) OutputVector(v);
+                !strcmp(s, "5") || !strcmp(s, "6") || !strcmp(s, "7") || !strcmp(s, "8")) OutputVector(v);
 
-            printf("Choose number of option to apply to your elements :\n"
+            printf("\nWhat do you want to do with your vector?\n"
+                   "Choose number of option to apply to your elements :\n"
                    "1. Inc\n"
                    "2. Dec\n"
                    "3. Abs\n"
                    "4. Elements greater than 0\n"
                    "5. Elements lesser than 0\n"
                    "6. Concatenation\n"
-                   "7. Quit\n");
+                   "7. Even numbers\n"
+                   "8. Odd numbers\n"
+                   "9. Quit\n");
         }
     }
     else if (GetElType(v) == COMPLEX){
@@ -131,7 +148,7 @@ void interface(size_t size, int type){
             }
 
             //Some bullshit
-            else if (strcmp(s, "6")) printf("\nERROR : Wrong keyword. TRY AGAIN!\n\n");
+            else if (strcmp(s, "6")) Warning("Wrong keyword");
 
             //Quit
             else break;

@@ -19,7 +19,7 @@ int main() {
     while (scanf("%s", s)) {
         if (!strcmp(s, "Integer") || !strcmp(s, "1")) { interface(n, INT); break; }
         else if (!strcmp(s, "Complex") || !strcmp(s, "2")) { interface(n, COMPLEX); break; }
-        else printf("\nERROR : Invalid keyword. TRY AGAIN.\n\n");
+        else Warning("Invalid keyword.");
         printf("Choose type of your vector :\n"
                "1. Integer\n"
                "2. Complex\n");
