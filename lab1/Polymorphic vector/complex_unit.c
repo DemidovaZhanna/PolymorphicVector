@@ -10,8 +10,8 @@
 
 complex* MakeComplex(double x, double y){
     complex* c = (complex*)malloc(sizeof(complex));
-    c->a = x;
-    c->b = y;
+    c->real = x;
+    c->imag = y;
     return c;
 }
 
@@ -27,32 +27,32 @@ void DeleteComplex(complex* c){
 
 // *** Getters ***
 
-double GetReal(complex* c) { return c->a; }
-double GetImag(complex* c) { return c->b; }
+double GetReal(complex* c) { return c->real; }
+double GetImag(complex* c) { return c->imag; }
 
 // *** Setters ***
 
-void SetReal(complex* c, double a) { c->a = a; }
-void SetImag(complex* c, double b) { c->b = b; }
+void SetReal(complex* c, double a) { c->real = a; }
+void SetImag(complex* c, double b) { c->imag = b; }
 
 // *** Operations ***
 
 complex* AddC(complex* a, complex* b){
-    return MakeComplex(a->a + b->a, a->b + b->b);
+    return MakeComplex(GetReal(a) + GetReal(b), GetImag(a) + GetImag(b));
 }
 
 complex* SubC(complex* a, complex* b){
-    return MakeComplex(a->a - b->a, a->b - b->b);
+    return MakeComplex(GetReal(a) - GetReal(b), GetImag(a) - GetImag(b));
 }
 
 complex* MultC(complex* a, complex* b){
-    return MakeComplex(a->a * b->a - a->b * b->b, a->a * b->b + a->b * b->a);
+    return MakeComplex(GetReal(a) * GetReal(b) - GetImag(a) * GetImag(b), GetReal(a) * GetImag(b) + GetImag(a) * GetReal(b));
 }
 
 complex* DivC(complex* a, complex* b){
-    complex* res = MultC(MakeComplex(a->a, a->b), MakeComplex(b->a, -b->b));
-    double c = b->a * b->a + b->b * b->b;
-    return MakeComplex(res->a / c, res->b / c);
+    complex* res = MultC(MakeComplex(GetReal(a), GetImag(a)), MakeComplex(GetReal(b), -GetImag(b)));
+    double c = GetReal(b) * GetReal(b) + GetImag(b) * GetImag(b);
+    return MakeComplex(GetReal(res) / c, GetImag(res) / c);
 }
 
 // *** Utils ***

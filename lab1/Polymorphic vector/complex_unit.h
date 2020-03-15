@@ -8,8 +8,8 @@
 #include <stdlib.h>
 
 typedef struct Complex {
-    double a;
-    double b;
+    double real;
+    double imag;
 } complex;
 
 // *** Constructor ***

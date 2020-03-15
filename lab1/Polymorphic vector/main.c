@@ -7,7 +7,7 @@
 const size_t MAXN = (1U << (sizeof(int) * 8 - 1)) - 1;
 
 int main() {
-    printf("Write down size of an array : ");
+    printf("Write down size of vector : ");
 
     size_t n = read_correct_num(0);
     char s[100] = "";

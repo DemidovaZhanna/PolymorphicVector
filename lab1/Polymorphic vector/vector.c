@@ -154,8 +154,8 @@ void OutputVector(Vector* v){
         printf("%d\n", GetDataI(v)[size - 1]);
     }
     else if (T == COMPLEX) {
-        for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi  ", GetDataC(v)[i].a, GetDataC(v)[i].b);
-        printf("%lf + %lfi\n", GetDataC(v)[size - 1].a, GetDataC(v)[size - 1].b);
+        for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi  ", GetReal(&GetDataC(v)[i]), GetImag(&GetDataC(v)[i]));
+        printf("%lf + %lfi\n", GetReal(&GetDataC(v)[size - 1]), GetImag(&GetDataC(v)[size - 1]));
     }
     else UnknownType();
 }
@@ -187,8 +187,8 @@ bool InputVector(Vector * v){
                 !is_num(real) || !is_num(imag)) is_succeeded = false;
 
             if (is_succeeded){
-                GetDataC(v)[i].a = convert_str_to_int(real);
-                GetDataC(v)[i].b = convert_str_to_int(imag);
+                SetReal(&GetDataC(v)[i], convert_str_to_int(real));
+                SetImag(&GetDataC(v)[i], convert_str_to_int(imag));
             }
         }
     }
