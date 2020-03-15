@@ -5,6 +5,8 @@
 
 #include "vector.h"
 
+size_t const MAXN;
+
 // *** Console error information ***
 
 void UnknownType(){
@@ -136,7 +138,7 @@ void PushBackC(Vector* v, complex* c){
     SetElement(v, GetSize(v) - 1, c);
 }
 
-// *** Output ***
+// *** Input and Output ***
 
 void OutputVector(Vector* v){
     printf("Your vector : ");
@@ -147,6 +149,48 @@ void OutputVector(Vector* v){
     if (T == INT) { for (size_t i = 0; i < size - 1; ++i) printf("%d, ", GetDataI(v)[i]); printf("%d\n", GetDataI(v)[size - 1]); }
     else if (T == COMPLEX) { for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi, ", GetDataC(v)[i].a, GetDataC(v)[i].b); printf("%lf + %lfi\n", GetDataC(v)[size - 1].a, GetDataC(v)[size - 1].b); }
     else UnknownType();
+}
+
+bool CorrectVectorFill(Vector * v){
+    if (GetSize(v) == 0) { printf("\n"); return true; }
+
+    bool is_succeeded = true;
+
+    if (GetElType(v) == INT){
+        printf("Enter %zu elements separated by space of your vector : ", GetSize(v));
+
+        char elem[100] = "";
+        for (size_t i = 0; i < GetSize(v); ++i) {
+            scanf("%s", elem);
+            if (is_greater_than_max(elem, MAXN) || !is_num(elem)) is_succeeded = false;
+
+            if (is_succeeded) GetDataI(v)[i] = convert_str_to_int(elem);
+        }
+    }
+    else if (GetElType(v) == COMPLEX){
+        printf("Enter %zu elements \"<real> <imag>\" : ", GetSize(v));
+
+        char real[100] = "";
+        char imag[100] = "";
+        for (size_t i = 0; i < GetSize(v); ++i){
+            scanf("%s %s", real, imag);
+            if (is_greater_than_max(real, MAXN) || is_greater_than_max(imag, MAXN) ||
+                !is_num(real) || !is_num(imag)) is_succeeded = false;
+
+            if (is_succeeded){
+                GetDataC(v)[i].a = convert_str_to_int(real);
+                GetDataC(v)[i].b = convert_str_to_int(imag);
+            }
+        }
+    }
+    else UnknownType();
+
+    if (!is_succeeded) {
+        if (GetElType(v) == INT) Warning("One of elements is not an integer type. Incorrect data.");
+        else if (GetElType(v) == COMPLEX) Warning("One of elements is not a complex type. Incorrect data.");
+    }
+
+    return is_succeeded;
 }
 
 // *** General Functions ***

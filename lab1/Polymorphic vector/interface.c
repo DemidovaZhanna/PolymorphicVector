@@ -61,11 +61,10 @@ void interface(size_t size, int type){
 
                 size_t n = read_correct_num(GetSize(v));
 
-                printf("Enter %zu elements separated by space of your vector : ", n);
-                if (n == 0) printf("\n");
-
                 Vector* v2 = MakeVector(n, INT);
-                for (size_t i = 0; i < GetSize(v2); ++i) scanf("%d", &GetDataI(v2)[i]);
+                bool is_data_correct = CorrectVectorFill(v2);
+                while (!is_data_correct) is_data_correct = CorrectVectorFill(v2);
+
                 Concatenation(v, v2);
 
                 DeleteVector(v2);
@@ -127,11 +126,10 @@ void interface(size_t size, int type){
 
                 size_t n = read_correct_num(GetSize(v));
 
-                printf("Enter %zu elements \"<real> <imag>\" : ", n);
-                if (n == 0) printf("\n");
-
                 Vector* v2 = MakeVector(n, COMPLEX);
-                for (size_t i = 0; i < GetSize(v2); ++i) scanf("%lf %lf", &GetDataC(v2)[i].a, &GetDataC(v2)[i].b);
+                bool is_data_correct = CorrectVectorFill(v2);
+                while (!is_data_correct) is_data_correct = CorrectVectorFill(v2);
+
                 Concatenation(v, v2);
 
                 DeleteVector(v2);

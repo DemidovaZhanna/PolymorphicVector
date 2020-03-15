@@ -43,12 +43,17 @@ bool is_num(char const* s){
     return true;
 }
 
+bool is_non_negative(char const * s){
+    if (s[0] == '-') return false;
+    return true;
+}
+
 size_t read_correct_num(size_t delta){
     char s[100] = "";
     scanf("%s", s);
 
-    while (s[0] == '-' || is_greater_than_max(s, MAXN - delta) || !is_num(s)){
-        if (s[0] == '-') printf("\nERROR : Negative size. TRY AGAIN!\n\n");
+    while (!is_non_negative(s) || is_greater_than_max(s, MAXN - delta) || !is_num(s)){
+        if (!is_non_negative(s)) printf("\nERROR : Negative size. TRY AGAIN!\n\n");
         else if (!is_num(s)) printf("\nERROR : It's not a number. TRY AGAIN\n\n");
         else printf("\nERROR : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - delta);
         printf("Write down size of an array : ");
@@ -59,6 +64,11 @@ size_t read_correct_num(size_t delta){
 }
 
 void Error(char const * msg){
-    printf("%s", msg);
+    printf("\n*** ERROR : %s ***\n", msg);
     exit(EXIT_FAILURE);
+}
+
+void Warning(char const * msg){
+    printf("\n*** WARNING : %s ***\n", msg);
+    printf("*** Try again. ***\n\n");
 }

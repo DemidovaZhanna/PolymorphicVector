@@ -71,6 +71,7 @@ Vector* FilterC(bool (*)(complex), Vector*);
 void Concatenation(Vector*, Vector*);
 void ConcatenationI(Vector*, Vector*);
 void ConcatenationC(Vector*, Vector*);
+bool CorrectVectorFill(Vector *);
 
 // *** Complex Functions ***
 
