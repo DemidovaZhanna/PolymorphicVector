@@ -151,13 +151,13 @@ void OutputVector(Vector* v){
     else UnknownType();
 }
 
-bool CorrectVectorFill(Vector * v){
+bool InputVector(Vector * v){
     if (GetSize(v) == 0) { printf("\n"); return true; }
 
     bool is_succeeded = true;
 
     if (GetElType(v) == INT){
-        printf("Enter %zu elements separated by space of your vector : ", GetSize(v));
+        printf("Enter %zu integer elements separated by space of your vector : ", GetSize(v));
 
         char elem[100] = "";
         for (size_t i = 0; i < GetSize(v); ++i) {

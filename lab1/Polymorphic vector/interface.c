@@ -13,12 +13,11 @@ void interface(size_t size, int type){
     else UnknownType();
 
     Vector* v = MakeVector(size, T);
+    bool is_data_correct = InputVector(v);
+    while (!is_data_correct) is_data_correct = InputVector(v);
+    OutputVector(v);
 
     if (GetElType(v) == INT) {
-        printf("Enter %zu integer numbers : ", GetSize(v));
-        for (size_t i = 0; i < GetSize(v); ++i) scanf("%d", GetDataI(v) + i);
-
-        OutputVector(v);
 
         printf("\nWhat do you want to do with your vector?\n"
                "Choose number of option to apply to your elements :\n"
@@ -62,8 +61,8 @@ void interface(size_t size, int type){
                 size_t n = read_correct_num(GetSize(v));
 
                 Vector* v2 = MakeVector(n, INT);
-                bool is_data_correct = CorrectVectorFill(v2);
-                while (!is_data_correct) is_data_correct = CorrectVectorFill(v2);
+                bool is_data_correct = InputVector(v2);
+                while (!is_data_correct) is_data_correct = InputVector(v2);
 
                 Concatenation(v, v2);
 
@@ -90,10 +89,6 @@ void interface(size_t size, int type){
         }
     }
     else if (GetElType(v) == COMPLEX){
-        printf("Enter %zu complex numbers \"<real> <imag>\" : ", GetSize(v));
-        for (size_t i = 0; i < GetSize(v); ++i) scanf("%lf %lfi", &GetDataC(v)[i].a, &GetDataC(v)[i].b);
-
-        OutputVector(v);
 
         printf("\nWhat do you want to do with your vector?\n"
                "Choose number of option to apply to your elements :\n"
@@ -127,8 +122,8 @@ void interface(size_t size, int type){
                 size_t n = read_correct_num(GetSize(v));
 
                 Vector* v2 = MakeVector(n, COMPLEX);
-                bool is_data_correct = CorrectVectorFill(v2);
-                while (!is_data_correct) is_data_correct = CorrectVectorFill(v2);
+                bool is_data_correct = InputVector(v2);
+                while (!is_data_correct) is_data_correct = InputVector(v2);
 
                 Concatenation(v, v2);
 
