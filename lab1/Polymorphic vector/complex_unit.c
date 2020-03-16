@@ -52,6 +52,7 @@ complex* MultC(complex* a, complex* b){
 complex* DivC(complex* a, complex* b){
     complex* res = MultC(MakeComplex(GetReal(a), GetImag(a)), MakeComplex(GetReal(b), -GetImag(b)));
     double c = GetReal(b) * GetReal(b) + GetImag(b) * GetImag(b);
+    if (c == 0) Error("Division by zero");
     return MakeComplex(GetReal(res) / c, GetImag(res) / c);
 }
 

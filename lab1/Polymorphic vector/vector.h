@@ -7,8 +7,6 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "utils.h"
 #include "complex_unit.h"
 
@@ -41,6 +39,7 @@ void SetSize(Vector*, size_t);
 void SetCapacity(Vector*, size_t);
 void SetElement(Vector*, size_t, void*);
 void SetData(Vector*, void*);
+void SetDataRC(Vector*, void*);
 
 // *** Getters ***
 

@@ -13,12 +13,15 @@
 void Error(char const*);
 void Warning(char const*);
 
+// *** Predicates ***
+
+bool is_num(char const*);
+bool is_greater_than_max(char const*, const int);
+
 // *** Utils ***
 
 double max(double, double);
-bool is_greater_than_max(char const*, const int);
 int convert_str_to_int(char const*);
-bool is_num(char const*);
 size_t read_correct_num(size_t);
 
 

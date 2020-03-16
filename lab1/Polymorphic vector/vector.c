@@ -2,6 +2,7 @@
 // Created by Vasiliy Evdokimov on 04.03.2020.
 //
 
+#include <stdio.h>
 #include "vector.h"
 
 size_t const DEFAULT_CAPACITY = 100;
@@ -101,7 +102,7 @@ void SetData(Vector* v, void* ptr) {
 //Even if realloc expand the given area there wouldn't be
 //any memory leaks because that is the same pointer which
 //points to a larger are at the same start
-//Check documentation (cppreference) for more info
+//Check documentation (cppreference.com) for more info
 void SetDataRC(Vector* v, void* ptr_realloc){
     v->data = ptr_realloc;
 }

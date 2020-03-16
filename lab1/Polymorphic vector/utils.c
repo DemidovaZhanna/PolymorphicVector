@@ -8,6 +8,8 @@
 
 const size_t MAXN;
 
+// *** Console Interaction ***
+
 void Error(char const * msg){
     printf("\n*** ERROR : %s ***\n", msg);
     exit(EXIT_FAILURE);
@@ -18,8 +20,17 @@ void Warning(char const * msg){
     printf("*** Try again. ***\n\n");
 }
 
-double max(double a, double b){
-    return (a <= b ? b : a);
+// *** Predicates ***
+
+bool is_num(char const* s){
+    int n = strlen(s);
+    for (int i = 0; i < n; ++i) if (!(s[i] <= '9' && s[i] >= '0')) return false;
+    return true;
+}
+
+bool is_non_negative(char const * s){
+    if (s[0] == '-') return false;
+    return true;
 }
 
 bool is_greater_than_max(char const * s, const int max) {
@@ -36,6 +47,12 @@ bool is_greater_than_max(char const * s, const int max) {
     return false;
 }
 
+// *** Utils ***
+
+double max(double a, double b){
+    return (a <= b ? b : a);
+}
+
 int convert_str_to_int(char const * s){
     int res = 0;
     int n = strlen(s);
@@ -45,17 +62,6 @@ int convert_str_to_int(char const * s){
     for (int i = 0; i < n; ++i) res += (s[i] - '0') * p10, p10 /= 10;
 
     return res;
-}
-
-bool is_num(char const* s){
-    int n = strlen(s);
-    for (int i = 0; i < n; ++i) if (!(s[i] <= '9' && s[i] >= '0')) return false;
-    return true;
-}
-
-bool is_non_negative(char const * s){
-    if (s[0] == '-') return false;
-    return true;
 }
 
 size_t read_correct_num(size_t delta){

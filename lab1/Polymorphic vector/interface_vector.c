@@ -2,6 +2,7 @@
 // Created by Vasiliy Evdokimov on 12.03.2020.
 //
 
+#include <stdio.h>
 #include "interface_vector.h"
 
 const size_t MAXN;
@@ -67,12 +68,14 @@ void interface_vector(){
             else if (!strcmp(s, "5")){
                 Vector* new_v = FilterI(&IsGreaterThan0, v);
                 OutputVector(new_v);
+                DeleteVector(new_v);
             }
 
             //Elements lesser than 0
             else if (!strcmp(s, "6")){
                 Vector* new_v = FilterI(&IsLesserThan0, v);
                 OutputVector(new_v);
+                DeleteVector(new_v);
             }
 
             //Concatenation
@@ -94,12 +97,14 @@ void interface_vector(){
             else if (!strcmp(s, "8")){
                 Vector* new_v = FilterI(&IsEven, v);
                 OutputVector(new_v);
+                DeleteVector(new_v);
             }
 
             //Odd numbers
             else if (!strcmp(s, "9")){
                 Vector* new_v = FilterI(&IsOdd, v);
                 OutputVector(new_v);
+                DeleteVector(new_v);
             }
 
             //Some bullshit
