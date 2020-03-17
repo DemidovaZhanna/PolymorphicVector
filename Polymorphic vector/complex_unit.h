@@ -6,6 +6,7 @@
 #define LABA1_COMPLEX_UNIT_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct Complex {
     double real;
@@ -19,6 +20,10 @@ complex* MakeComplex(double, double);
 // *** Destructor ***
 
 void DeleteComplex(complex*);
+
+// *** Input and Output
+
+void OutputComplex(complex*);
 
 // *** Getters ***
 
@@ -36,6 +41,12 @@ complex* AddC(complex*, complex*);
 complex* SubC(complex*, complex*);
 complex* Multc(complex*, complex*);
 complex* DivC(complex*, complex*);
+
+// *** Predicates ***
+
+bool IsPositiveReal (complex);
+bool IsPositiveImag (complex);
+bool IsPositiveRealAndImag (complex);
 
 // *** Utils ***
 

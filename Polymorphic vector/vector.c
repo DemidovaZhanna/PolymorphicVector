@@ -145,17 +145,17 @@ void PushBackC(Vector* v, complex* c){
 
 void OutputVector(Vector* v){
     printf("Your vector : ");
-    size_t size = GetSize(v);
     Eltype T = GetElType(v);
-    if (size == 0) { printf("\n"); return; }
+    if (GetSize(v) == 0) { printf("\n"); return; }
 
     if (T == INT) {
-        for (size_t i = 0; i < size - 1; ++i) printf("%d  ", GetDataI(v)[i]);
-        printf("%d\n", GetDataI(v)[size - 1]);
+        for (size_t i = 0; i < GetSize(v) - 1; ++i) printf("%d  ", GetDataI(v)[i]);
+        printf("%d\n", GetDataI(v)[GetSize(v) - 1]);
     }
     else if (T == COMPLEX) {
-        for (size_t i = 0; i < size - 1; ++i) printf("%lf + %lfi  ", GetReal(&GetDataC(v)[i]), GetImag(&GetDataC(v)[i]));
-        printf("%lf + %lfi\n", GetReal(&GetDataC(v)[size - 1]), GetImag(&GetDataC(v)[size - 1]));
+        for (size_t i = 0; i < GetSize(v) - 1; ++i) OutputComplex(&GetDataC(v)[i]);
+        OutputComplex(&GetDataC(v)[GetSize(v) - 1]);
+        printf("\n");
     }
     else UnknownType();
 }

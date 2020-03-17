@@ -2,6 +2,8 @@
 // Created by Vasiliy Evdokimov on 28.02.2020.
 //
 
+#include <stdio.h>
+#include <math.h>
 #include "complex_unit.h"
 #include "utils.h"
 
@@ -22,6 +24,13 @@ void DeleteComplex(complex* c){
         c = NULL;
     }
     else Warning("Trying to free NULL pointer");
+}
+
+// *** Input and Output ***
+
+void OutputComplex(complex* c){
+    if (GetImag(c) >= 0) printf("%lf + %lfi ", GetReal(c), GetImag(c));
+    else if (GetImag(c) < 0) printf("%lf - %lfi ", GetReal(c), fabs(GetImag(c)));
 }
 
 // *** Getters ***
@@ -55,6 +64,12 @@ complex* DivC(complex* a, complex* b){
     if (c == 0) Error("Division by zero");
     return MakeComplex(GetReal(res) / c, GetImag(res) / c);
 }
+
+// *** Predicates ***
+
+bool IsPositiveReal(complex c) { return (GetReal(&c) > 0 ? 1 : 0); }
+bool IsPositiveImag(complex c) { return (GetImag(&c) > 0 ? 1 : 0); }
+bool IsPositiveRealAndImag(complex c) { return IsPositiveReal(c) && IsPositiveImag(c); }
 
 // *** Utils ***
 

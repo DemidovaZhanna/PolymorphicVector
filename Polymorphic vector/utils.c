@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 
-const size_t MAXN;
+size_t const MAXN;
 
 // *** Console Interaction ***
 
@@ -24,13 +24,21 @@ void Warning(char const * msg){
 
 bool is_num(char const* s){
     int n = strlen(s);
-    for (int i = 0; i < n; ++i) if (!(s[i] <= '9' && s[i] >= '0')) return false;
+    if (n == 1 && s[0] == '-') return false;
+
+    size_t start = 0;
+    if (is_negative(s)) start = 1;
+    for (size_t i = start; i < n; ++i) if (!(s[i] <= '9' && s[i] >= '0')) return false;
     return true;
 }
 
 bool is_non_negative(char const * s){
     if (s[0] == '-') return false;
     return true;
+}
+
+bool is_negative(char const * s){
+    return !is_non_negative(s);
 }
 
 bool is_greater_than_max(char const * s, const int max) {
@@ -55,13 +63,17 @@ double max(double a, double b){
 
 int convert_str_to_int(char const * s){
     int res = 0;
-    int n = strlen(s);
+    size_t n = strlen(s);
+    int sign = 1;
+    int start = 0;
+    if (is_negative(s)) sign = -1, start = 1;
+
     int p10 = 1e0;
-    for (int i = 0; i < n - 1; ++i) p10 *= 10;
+    for (size_t i = 0; i < n - (1 + start); ++i) p10 *= 10;
 
-    for (int i = 0; i < n; ++i) res += (s[i] - '0') * p10, p10 /= 10;
+    for (size_t i = start; i < n; ++i) res += (s[i] - '0') * p10, p10 /= 10;
 
-    return res;
+    return sign * res;
 }
 
 size_t read_correct_num(size_t delta){

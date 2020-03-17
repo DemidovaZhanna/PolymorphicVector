@@ -28,6 +28,9 @@ void interface_vector(){
                "2. Complex\n");
     }
 
+    if (T == INT) printf("You've chosen integer.\n");
+    else if (T == COMPLEX) printf("You've chosen complex.\n");
+
     Vector* v = MakeVector(size, T);
     bool is_data_correct = InputVector(v);
     while (!is_data_correct) is_data_correct = InputVector(v);
@@ -135,12 +138,15 @@ void interface_vector(){
 
         printf("\nWhat do you want to do with your vector?\n"
                "Choose number of option to apply to your elements :\n"
-               "1. Inc real \n"
-               "2. Inc imag \n"
-               "3. Dec real \n"
-               "4. Dec imag \n"
-               "5. Concatenation \n"
-               "6. Quit\n");
+               "1. Inc real\n"
+               "2. Inc imag\n"
+               "3. Dec real\n"
+               "4. Dec imag\n"
+               "5. Concatenation\n"
+               "6. Positive real\n"
+               "7. Positive imag\n"
+               "8. Positive real and imag\n"
+               "9. Quit\n");
 
         char s[100] = "";
 
@@ -173,23 +179,48 @@ void interface_vector(){
                 DeleteVector(v2);
             }
 
+            //Positive real
+            else if (!strcmp(s, "6")){
+                Vector* new_v = FilterC(&IsPositiveReal, v);
+                OutputVector(new_v);
+                DeleteVector(new_v);
+            }
+
+            //Positive imag
+            else if (!strcmp(s, "7")){
+                Vector* new_v = FilterC(&IsPositiveImag, v);
+                OutputVector(new_v);
+                DeleteVector(new_v);
+            }
+
+            //Positive real and imag
+            else if (!strcmp(s, "8")){
+                Vector* new_v = FilterC(&IsPositiveRealAndImag, v);
+                OutputVector(new_v);
+                DeleteVector(new_v);
+            }
+
             //Some bullshit
-            else if (strcmp(s, "6")) Warning("Wrong keyword");
+            else if (strcmp(s, "9")) Warning("Wrong keyword");
 
             //Quit
             else break;
 
             if (!strcmp(s, "1") || !strcmp(s, "2") || !strcmp(s, "3") || !strcmp(s, "4") ||
-                !strcmp(s, "5")) OutputVector(v);
+                !strcmp(s, "5") || !strcmp(s, "6") || !strcmp(s, "7") || !strcmp(s, "8")) OutputVector(v);
 
 
-            printf("Choose number of option to apply to your elements :\n"
-                   "1. Inc real \n"
-                   "2. Inc imag \n"
-                   "3. Dec real \n"
-                   "4. Dec imag \n"
-                   "5. Concatenation \n"
-                   "6. Quit\n");
+            printf("\nWhat do you want to do with your vector?\n"
+                   "Choose number of option to apply to your elements :\n"
+                   "1. Inc real\n"
+                   "2. Inc imag\n"
+                   "3. Dec real\n"
+                   "4. Dec imag\n"
+                   "5. Concatenation\n"
+                   "6. Positive real\n"
+                   "7. Positive imag\n"
+                   "8. Positive real and imag\n"
+                   "9. Quit\n");
         }
     }
     else UnknownType();
