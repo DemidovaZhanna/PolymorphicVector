@@ -29,7 +29,7 @@ Vector* MakeVector(size_t size, Eltype eltype) {
     else if (v->eltype == COMPLEX) type_size = sizeof(complex);
     else UnknownType();
 
-    v->data = calloc(v->size, type_size);
+    v->data = calloc(v->capacity, type_size);
 
     return v;
 };
@@ -149,11 +149,11 @@ void OutputVector(Vector* v){
     if (GetSize(v) == 0) { printf("\n"); return; }
 
     if (T == INT) {
-        for (size_t i = 0; i < GetSize(v) - 1; ++i) printf("%d  ", GetDataI(v)[i]);
+        for (size_t i = 0; i < GetSize(v) - 1; ++i) printf("%d | ", GetDataI(v)[i]);
         printf("%d\n", GetDataI(v)[GetSize(v) - 1]);
     }
     else if (T == COMPLEX) {
-        for (size_t i = 0; i < GetSize(v) - 1; ++i) OutputComplex(&GetDataC(v)[i]);
+        for (size_t i = 0; i < GetSize(v) - 1; ++i) { OutputComplex(&GetDataC(v)[i]); printf(" | "); }
         OutputComplex(&GetDataC(v)[GetSize(v) - 1]);
         printf("\n");
     }
@@ -250,10 +250,13 @@ void ConcatenationI(Vector* v1, Vector* v2){
 void ConcatenationC(Vector* v1, Vector* v2){
     size_t new_size = GetSize(v1) + GetSize(v2);
     size_t prev_size = GetSize(v1);
-    SetSize(v1, new_size);
-    SetDataRC(v1, realloc(GetDataC(v1), new_size * sizeof(complex)));
+    v1->size = new_size;
+    //SetSize(v1, new_size);
+    //SetDataRC(v1, realloc(GetDataC(v1), new_size * sizeof(complex)));
+    v1->data = realloc(v1->data, new_size * sizeof(complex));
 
-    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) GetDataC(v1)[i] = GetDataC(v2)[j];
+    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) ((complex*)v1->data)[i] = ((complex*)v2->data)[j];
+        //GetDataC(v1)[i] = GetDataC(v2)[j];
 }
 
 // *** Int Functions ***

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "interface_vector.h"
 
-const size_t MAXN;
+size_t const MAXN;
 
 void interface_vector(){
 
@@ -205,6 +205,7 @@ void interface_vector(){
 
             //Quit
             else break;
+
 
             if (!strcmp(s, "1") || !strcmp(s, "2") || !strcmp(s, "3") || !strcmp(s, "4") ||
                 !strcmp(s, "5") || !strcmp(s, "6") || !strcmp(s, "7") || !strcmp(s, "8")) OutputVector(v);

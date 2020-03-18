@@ -29,8 +29,8 @@ void DeleteComplex(complex* c){
 // *** Input and Output ***
 
 void OutputComplex(complex* c){
-    if (GetImag(c) >= 0) printf("%lf + %lfi ", GetReal(c), GetImag(c));
-    else if (GetImag(c) < 0) printf("%lf - %lfi ", GetReal(c), fabs(GetImag(c)));
+    if (GetImag(c) >= 0) printf("%lf + %lfi", GetReal(c), GetImag(c));
+    else if (GetImag(c) < 0) printf("%lf - %lfi", GetReal(c), fabs(GetImag(c)));
 }
 
 // *** Getters ***

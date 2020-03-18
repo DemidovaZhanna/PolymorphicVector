@@ -44,9 +44,9 @@ complex* DivC(complex*, complex*);
 
 // *** Predicates ***
 
-bool IsPositiveReal (complex);
-bool IsPositiveImag (complex);
-bool IsPositiveRealAndImag (complex);
+bool IsPositiveReal(complex);
+bool IsPositiveImag(complex);
+bool IsPositiveRealAndImag(complex);
 
 // *** Utils ***
 

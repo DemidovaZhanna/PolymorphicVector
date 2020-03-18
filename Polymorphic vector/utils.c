@@ -20,7 +20,8 @@ void Warning(char const * msg){
     printf("*** Try again. ***\n\n");
 }
 
-// *** Predicates ***
+// *** Predicates that work with strings ***
+// *** to check if that can be casted to int ***
 
 bool is_num(char const* s){
     int n = strlen(s);
