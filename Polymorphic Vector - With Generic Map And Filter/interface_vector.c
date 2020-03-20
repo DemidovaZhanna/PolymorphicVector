@@ -181,21 +181,21 @@ void interface_vector(){
 
             //Positive real
             else if (!strcmp(s, "6")){
-                Vector* new_v = FilterC(&IsPositiveReal, v);
+                Vector* new_v = Filter(&IsPositiveReal, v);
                 OutputVector(new_v);
                 DeleteVector(new_v);
             }
 
             //Positive imag
             else if (!strcmp(s, "7")){
-                Vector* new_v = FilterC(&IsPositiveImag, v);
+                Vector* new_v = Filter(&IsPositiveImag, v);
                 OutputVector(new_v);
                 DeleteVector(new_v);
             }
 
             //Positive real and imag
             else if (!strcmp(s, "8")){
-                Vector* new_v = FilterC(&IsPositiveRealAndImag, v);
+                Vector* new_v = Filter(&IsPositiveRealAndImag, v);
                 OutputVector(new_v);
                 DeleteVector(new_v);
             }
