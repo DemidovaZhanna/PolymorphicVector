@@ -1,4 +1,4 @@
-So the difference between two folders (implementations) is that here first of all Map changes initial Vector, second of all I don't need to use in third party programs functions MapI, MapC, FilterI, FilterC and use just generic Map and Filter, thirdly I had to change all function's signatures that was previously used in MapI, MapC, FilterI, FilterC.
+So the difference between two folders (implementations) is that here first of all Map changes initial Vector, second of all I don't need to use in third party programs functions MapI, MapC, FilterI, FilterC and only define them and use them only in generic Map and Filter, thirdly I had to change all function's signatures that was previously used in MapI, MapC, FilterI, FilterC.
 
 That's pretty much sums it up. 
 
