@@ -1,3 +1,6 @@
+//To run test_vector.c use next command in console
+//gcc test_vector.c complex_unit.c vector.c utils.c -o test
+
 #include <stdio.h>
 #include <stdbool.h>
 #include "vector.h"
