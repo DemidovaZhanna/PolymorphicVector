@@ -280,13 +280,10 @@ void ConcatenationI(Vector* v1, Vector* v2){
 void ConcatenationC(Vector* v1, Vector* v2){
     size_t new_size = GetSize(v1) + GetSize(v2);
     size_t prev_size = GetSize(v1);
-    v1->size = new_size;
-    //SetSize(v1, new_size);
-    //SetDataRC(v1, realloc(GetDataC(v1), new_size * sizeof(complex)));
-    v1->data = realloc(v1->data, new_size * sizeof(complex));
+    SetSize(v1, new_size);
+    SetDataRC(v1, realloc(GetDataC(v1), new_size * sizeof(complex)));
 
-    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) ((complex*)v1->data)[i] = ((complex*)v2->data)[j];
-        //GetDataC(v1)[i] = GetDataC(v2)[j];
+    for (size_t i = prev_size, j = 0; i < new_size; ++i, ++j) GetDataC(v1)[i] = GetDataC(v2)[j];
 }
 
 // *** Int Functions ***
