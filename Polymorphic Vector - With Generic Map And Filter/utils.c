@@ -23,7 +23,7 @@ void Warning(char const * msg){
 // *** Predicates that work with strings ***
 // *** to check if that can be casted to int ***
 
-bool is_num(char const* s){
+bool is_int(char const* s){
     int n = strlen(s);
     if (n == 1 && s[0] == '-') return false;
 
@@ -81,9 +81,9 @@ size_t read_correct_num(size_t delta){
     char s[100] = "";
     scanf("%s", s);
 
-    while (!is_non_negative(s) || is_greater_than_max(s, MAXN - delta) || !is_num(s)){
+    while (!is_non_negative(s) || is_greater_than_max(s, MAXN - delta) || !is_int(s)){
         if (!is_non_negative(s)) Warning("Negative size.");
-        else if (!is_num(s)) Warning("It's not a number.");
+        else if (!is_int(s)) Warning("It's not a number.");
         else printf("\nWARNING : Too big size, choose less number <= %zu. TRY AGAIN\n\n", MAXN - delta);
         printf("Write down size of an array : ");
         scanf("%s", s);

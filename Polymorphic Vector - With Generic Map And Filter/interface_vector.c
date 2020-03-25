@@ -20,8 +20,14 @@ void interface_vector(){
 
     Eltype T = -1;
     while (scanf("%s", s)) {
-        if (!strcmp(s, "Integer") || !strcmp(s, "1")) { T = INT; break; }
-        else if (!strcmp(s, "Complex") || !strcmp(s, "2")) { T = COMPLEX; break; }
+        if (!strcmp(s, "Integer") || !strcmp(s, "1")) {
+            T = INT;
+            break;
+        }
+        else if (!strcmp(s, "Complex") || !strcmp(s, "2")) {
+            T = COMPLEX;
+            break;
+        }
         else Warning("Invalid keyword.");
         printf("Choose type of your vector :\n"
                "1. Integer\n"

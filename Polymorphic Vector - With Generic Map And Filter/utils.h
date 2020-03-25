@@ -15,7 +15,7 @@ void Warning(char const*);
 
 // *** Predicates ***
 
-bool is_num(char const*);
+bool is_int(char const*);
 bool is_greater_than_max(char const*, const int);
 bool is_non_negative(char const*);
 bool is_negative(char const*);

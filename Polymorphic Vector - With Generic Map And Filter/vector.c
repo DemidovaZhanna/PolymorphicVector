@@ -178,7 +178,7 @@ bool InputVector(Vector * v){
         char elem[100] = "";
         for (size_t i = 0; i < GetSize(v); ++i) {
             scanf("%s", elem);
-            if (is_greater_than_max(elem, MAXN) || !is_num(elem)) is_succeeded = false;
+            if (is_greater_than_max(elem, MAXN) || !is_int(elem)) is_succeeded = false;
 
             if (is_succeeded) GetDataI(v)[i] = convert_str_to_int(elem);
         }
@@ -186,17 +186,14 @@ bool InputVector(Vector * v){
     else if (GetElType(v) == COMPLEX){
         printf("Enter %zu elements \"<real> <imag>\" : ", GetSize(v));
 
-        char real[100] = "";
-        char imag[100] = "";
+        float real = 0;
+        float imag = 0;
         for (size_t i = 0; i < GetSize(v); ++i){
-            scanf("%s %s", real, imag);
-            if (is_greater_than_max(real, MAXN) || is_greater_than_max(imag, MAXN) ||
-                !is_num(real) || !is_num(imag)) is_succeeded = false;
-
-            if (is_succeeded){
-                SetReal(&GetDataC(v)[i], convert_str_to_int(real));
-                SetImag(&GetDataC(v)[i], convert_str_to_int(imag));
+            if (scanf("%f %f", &real, &imag) == 2){
+                SetReal(&GetDataC(v)[i], real);
+                SetImag(&GetDataC(v)[i], imag);
             }
+            else is_succeeded = false;
         }
     }
     else UnknownType();
